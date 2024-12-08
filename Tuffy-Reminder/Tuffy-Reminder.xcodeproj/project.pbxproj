@@ -16,6 +16,8 @@
 		710ED0C72CF44B5D001A62C1 /* Tuffy_ReminderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710ED0C62CF44B5D001A62C1 /* Tuffy_ReminderTests.swift */; };
 		710ED0D12CF44B5D001A62C1 /* Tuffy_ReminderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710ED0D02CF44B5D001A62C1 /* Tuffy_ReminderUITests.swift */; };
 		710ED0D32CF44B5D001A62C1 /* Tuffy_ReminderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710ED0D22CF44B5D001A62C1 /* Tuffy_ReminderUITestsLaunchTests.swift */; };
+		71A2B2BF2D0430AF005CB912 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A2B2BE2D0430AF005CB912 /* EntryViewController.swift */; };
+		71A2B2C12D04DF04005CB912 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A2B2C02D04DF04005CB912 /* TaskViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		710ED0CC2CF44B5D001A62C1 /* Tuffy-ReminderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tuffy-ReminderUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		710ED0D02CF44B5D001A62C1 /* Tuffy_ReminderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuffy_ReminderUITests.swift; sourceTree = "<group>"; };
 		710ED0D22CF44B5D001A62C1 /* Tuffy_ReminderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuffy_ReminderUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		71A2B2BE2D0430AF005CB912 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
+		71A2B2C02D04DF04005CB912 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				710ED0B82CF44B5D001A62C1 /* Assets.xcassets */,
 				710ED0BA2CF44B5D001A62C1 /* LaunchScreen.storyboard */,
 				710ED0BD2CF44B5D001A62C1 /* Info.plist */,
+				71A2B2BE2D0430AF005CB912 /* EntryViewController.swift */,
+				71A2B2C02D04DF04005CB912 /* TaskViewController.swift */,
 			);
 			path = "Tuffy-Reminder";
 			sourceTree = "<group>";
@@ -259,6 +265,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				710ED0B42CF44B5B001A62C1 /* ViewController.swift in Sources */,
+				71A2B2BF2D0430AF005CB912 /* EntryViewController.swift in Sources */,
+				71A2B2C12D04DF04005CB912 /* TaskViewController.swift in Sources */,
 				710ED0B02CF44B5B001A62C1 /* AppDelegate.swift in Sources */,
 				710ED0B22CF44B5B001A62C1 /* SceneDelegate.swift in Sources */,
 			);
