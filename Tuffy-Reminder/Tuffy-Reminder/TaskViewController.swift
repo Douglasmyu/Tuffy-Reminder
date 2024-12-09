@@ -13,6 +13,7 @@ class TaskViewController: UIViewController {
     
     var task: String?
     var currentPosition: Int = 0 // Index of the task to delete
+    var update: (() -> Void)?
     
     // Computed property to manage task count in UserDefaults
     var count: Int {
@@ -32,24 +33,32 @@ class TaskViewController: UIViewController {
     }
     
     @objc func deleteTask() {
-        // Decrease the task count
-        let newCount = count - 1
-        count = newCount // Save the updated count to UserDefaults
+        guard var count = UserDefaults.standard.value(forKey: "count") as? Int else {
+            return
+        }
         
         // Remove the specific task
-        UserDefaults.standard.setValue(nil, forKey: "task_\(currentPosition)")
+        UserDefaults.standard.removeObject(forKey: "task_\(currentPosition + 1)")
         
         // Shift tasks after the deleted one
-        for i in currentPosition..<newCount {
+        for i in currentPosition + 1..<count {
             if let nextTask = UserDefaults.standard.value(forKey: "task_\(i + 1)") as? String {
                 UserDefaults.standard.setValue(nextTask, forKey: "task_\(i)")
             }
         }
         
+        // Decrease the task count
+        count -= 1
+        UserDefaults.standard.setValue(count, forKey: "count")
+        
         // Clear the last unused task
-        UserDefaults.standard.setValue(nil, forKey: "task_\(newCount + 1)")
+        UserDefaults.standard.removeObject(forKey: "task_\(count + 1)")
+        
+        // Call the update closure
+        update?()
         
         // Navigate back to the previous screen
         navigationController?.popViewController(animated: true)
     }
+
 }
