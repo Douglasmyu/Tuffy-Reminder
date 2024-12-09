@@ -81,7 +81,7 @@ extension ViewController: UITableViewDelegate {
 extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // If there is user input in search bar
+        //Base case if something is there
         if (isSearching) {
             return filteredTasks.count
         }
@@ -90,17 +90,45 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        var task = tasks[indexPath.row]
-        if (isSearching) {
-            task = filteredTasks[indexPath.row]
-        }
+        let task = tasks[indexPath.row]
         
-        cell.accessoryType = .checkmark
         cell.textLabel?.text = task
         
-        // cell.textLabel?.text = tasks[indexPath.row]
+        var toggleButton: UIButton
+        if let existingButton = cell.viewWithTag(1001) as? UIButton {
+            toggleButton = existingButton
+        } else {
+            let buttonSize: CGFloat = 20
+            toggleButton = UIButton(frame: CGRect(x: cell.frame.width - 70, y: (cell.frame.height - buttonSize) / 2, width: buttonSize, height: buttonSize))
+            toggleButton.tag = 1001
+            toggleButton.addTarget(self, action: #selector(toggleTaskStatus(_:)), for: .touchUpInside)
+            toggleButton.layer.cornerRadius = buttonSize / 2
+            toggleButton.clipsToBounds = true
+            cell.addSubview(toggleButton)
+        }
+        
+        let isDone = UserDefaults.standard.bool(forKey: "task_\(indexPath.row + 1)_done")
+        toggleButton.backgroundColor = isDone ? .green : .red
+        
+        cell.accessoryType = isDone ? .checkmark : .none
+
         return cell
     }
+
+
+    @objc func toggleTaskStatus(_ sender: UIButton) {
+        //figure out what cell is tapped
+        guard let indexPath = tableView.indexPathForRow(at: sender.convert(CGPoint.zero, to: tableView)) else { return }
+        
+        let isDone = UserDefaults.standard.bool(forKey: "task_\(indexPath.row + 1)_done")
+        
+        //Toggling status and making sure its the right one
+        UserDefaults.standard.setValue(!isDone, forKey: "task_\(indexPath.row + 1)_done")
+        
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+
+
     
     
 }
