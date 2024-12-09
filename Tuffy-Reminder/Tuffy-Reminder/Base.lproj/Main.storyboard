@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="YsW-Cx-vQl">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="164" width="393" height="654"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="separatorColor" systemColor="labelColor"/>
                                 <color key="sectionIndexColor" systemColor="labelColor"/>
@@ -33,17 +33,28 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" text="" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="oz3-Dz-dFd">
+                                <rect key="frame" x="5" y="108" width="393" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="G7l-5t-0Mj"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YsW-Cx-vQl" secondAttribute="trailing" id="0Cr-xv-jij"/>
                             <constraint firstItem="YsW-Cx-vQl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OoY-U1-mdV"/>
-                            <constraint firstItem="YsW-Cx-vQl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="rSQ-ib-xip"/>
+                            <constraint firstItem="oz3-Dz-dFd" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="5" id="P3x-yf-R0v"/>
+                            <constraint firstItem="oz3-Dz-dFd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="dhg-Ug-Dsc"/>
+                            <constraint firstItem="oz3-Dz-dFd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="hgD-GT-3Hw"/>
+                            <constraint firstItem="YsW-Cx-vQl" firstAttribute="top" secondItem="oz3-Dz-dFd" secondAttribute="bottom" id="qj7-em-Bj1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YsW-Cx-vQl" secondAttribute="bottom" id="yZk-0X-lOn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="0Yf-xF-rHS">
+                        <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" title="Add" id="h3k-39-Lvv">
                             <connections>
                                 <action selector="didTapAdd" destination="BYZ-38-t0r" id="Cs6-cp-Trc"/>
@@ -51,6 +62,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="oz3-Dz-dFd" id="rve-C7-m8T"/>
                         <outlet property="tableView" destination="YsW-Cx-vQl" id="Z1k-KG-fIx"/>
                     </connections>
                 </viewController>
@@ -67,7 +79,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DHA-Gd-s81">
-                                <rect key="frame" x="0.0" y="59" width="393" height="34"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="5xJ-IY-rW8"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="54" id="7W0-6i-hji"/>
@@ -152,7 +164,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
