@@ -34,7 +34,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <searchBar contentMode="redraw" text="" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="oz3-Dz-dFd">
+                            <searchBar contentMode="redraw" text="" placeholder="Search" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oz3-Dz-dFd">
                                 <rect key="frame" x="0.0" y="108" width="393" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>

@@ -94,12 +94,12 @@ class ViewController: UIViewController {
     }
     
     func sortTasksAsc() {
-        tasks.sort { $0.lowercased() < $1.lowercased() }
+        isSearching ? filteredTasks.sort { $0.lowercased() < $1.lowercased() } : tasks.sort { $0.lowercased() < $1.lowercased() }
         tableView.reloadData()
     }
     
     func sortTasksDesc() {
-        tasks.sort { $0.lowercased() > $1.lowercased() }
+        isSearching ? filteredTasks.sort { $0.lowercased() > $1.lowercased() } : tasks.sort { $0.lowercased() > $1.lowercased() }
         tableView.reloadData()
     }
     
@@ -232,6 +232,11 @@ extension ViewController : UISearchBarDelegate {
         isSearching = false
         filteredTasks.removeAll()
         tableView.reloadData()
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
 
