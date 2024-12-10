@@ -36,7 +36,27 @@ class ViewController: UIViewController {
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
             tableView.addGestureRecognizer(longPressGesture)
+    }
+    
+    @IBAction func didTapSortButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Sort Tasks", message: "Sort", preferredStyle: .actionSheet)
         
+        alert.addAction(UIAlertAction(title: "Alphabetically Ascending", style: .default, handler: { [weak self] _ in self?.sortTasksAsc() }))
+        
+        alert.addAction(UIAlertAction(title: "Alphabetically Descending", style: .default, handler: { [weak self] _ in self?.sortTasksDesc() }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func sortTasksAsc() {
+        tasks.sort { $0.lowercased() < $1.lowercased() }
+        tableView.reloadData()
+    }
+    
+    func sortTasksDesc() {
+        tasks.sort { $0.lowercased() > $1.lowercased() }
+        tableView.reloadData()
     }
     
     @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
@@ -141,7 +161,7 @@ extension ViewController: UITableViewDataSource {
         //figure out what cell is tapped
         guard let indexPath = tableView.indexPathForRow(at: sender.convert(CGPoint.zero, to: tableView)) else { return }
         
-        let taskIndex = isSearching ? tasks.firstIndex(of: filteredTasks[indexPath.row]) ?? indexPath.row : indexPath.row
+        _ = isSearching ? tasks.firstIndex(of: filteredTasks[indexPath.row]) ?? indexPath.row : indexPath.row
         let isDone = UserDefaults.standard.bool(forKey: "task_\(indexPath.row + 1)_done")
         
         //Toggling status and making sure its the right one
@@ -149,10 +169,6 @@ extension ViewController: UITableViewDataSource {
         
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
-
-
-    
-    
 }
 
 extension ViewController : UISearchBarDelegate {
@@ -174,3 +190,4 @@ extension ViewController : UISearchBarDelegate {
         tableView.reloadData()
     }
 }
+
