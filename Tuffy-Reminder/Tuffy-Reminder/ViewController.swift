@@ -34,9 +34,52 @@ class ViewController: UIViewController {
         // Get all current saved task
         updateTask()
         
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+            
+            
+            let changeThemeButton = UIButton(type: .system)
+            changeThemeButton.setTitle("Theme", for: .normal)
+            changeThemeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+            changeThemeButton.backgroundColor = .lightGray
+            changeThemeButton.setTitleColor(.white, for: .normal)
+            changeThemeButton.layer.cornerRadius = 5
+            changeThemeButton.frame = CGRect(x: 30, y: view.frame.height - 80, width: 100, height: 40)
+            changeThemeButton.autoresizingMask = [.flexibleTopMargin, .flexibleRightMargin]
+        
+            changeThemeButton.addTarget(self, action: #selector(changeTheme), for: .touchUpInside)
+            view.addSubview(changeThemeButton)
+            
+            if let themeColor = UserDefaults.standard.string(forKey: "themeColor") {
+                view.backgroundColor = UIColor(named: themeColor) ?? .white
+            }
+        
+        
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
             tableView.addGestureRecognizer(longPressGesture)
+        
     }
+    
+    func setTheme(color: UIColor, name: String) {
+        view.backgroundColor = color
+        UserDefaults.standard.setValue(name, forKey: "themeColor")
+    }
+    @objc func changeTheme() {
+        let alert = UIAlertController(title: "Choose Theme", message: "Select a background color", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Light", style: .default, handler: { _ in
+            self.setTheme(color: .white, name: "Light")
+        }))
+        alert.addAction(UIAlertAction(title: "Dark", style: .default, handler: { _ in
+            self.setTheme(color: .black, name: "Dark")
+        }))
+        alert.addAction(UIAlertAction(title: "Orange", style: .default, handler: { _ in
+            self.setTheme(color: .systemOrange, name: "Orange")
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true)
+    }
+
     
     @IBAction func didTapSortButton(_ sender: UIButton) {
         let alert = UIAlertController(title: "Sort Tasks", message: "Sort", preferredStyle: .actionSheet)
