@@ -61,6 +61,7 @@ class ViewController: UIViewController {
     
     func setTheme(color: UIColor, name: String) {
         view.backgroundColor = color
+        tableView.backgroundColor = color
         UserDefaults.standard.setValue(name, forKey: "themeColor")
     }
     @objc func changeTheme() {
