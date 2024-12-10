@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CKO-rR-kc8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CKO-rR-kc8">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -55,6 +55,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="0Yf-xF-rHS">
                         <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" title="Timer" id="nch-i3-qhT">
+                            <connections>
+                                <action selector="didTapAdd" destination="BYZ-38-t0r" id="zlz-f2-Okj"/>
+                                <segue destination="1Lo-1L-rRV" kind="show" id="XWh-Mp-cEq"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add" id="h3k-39-Lvv">
                             <connections>
                                 <action selector="didTapAdd" destination="BYZ-38-t0r" id="Cs6-cp-Trc"/>
@@ -79,7 +85,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DHA-Gd-s81">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="5xJ-IY-rW8"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="54" id="7W0-6i-hji"/>
@@ -155,6 +161,31 @@
             </objects>
             <point key="canvasLocation" x="78.625954198473281" y="-39.436619718309863"/>
         </scene>
+        <!--Timer View Controller-->
+        <scene sceneID="onj-t0-o6n">
+            <objects>
+                <viewController id="1Lo-1L-rRV" customClass="TimerViewController" customModule="Tuffy_Reminder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SJG-76-Apj">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Focus Timer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l96-2l-ni5">
+                                <rect key="frame" x="101" y="146" width="190" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="otg-6f-Syf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Wks-pZ-uUz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PVG-uh-AEK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="768.70229007633588" y="-716.19718309859161"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="labelColor">
@@ -164,7 +195,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
