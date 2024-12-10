@@ -94,8 +94,8 @@ extension ViewController: UITableViewDelegate {
     
         let vc = storyboard?.instantiateViewController(identifier: "task") as! TaskViewController
         vc.title = "New Task"
-        vc.task = tasks[indexPath.row]
-        vc.currentPosition = indexPath.row
+        vc.task = isSearching ? filteredTasks[indexPath.row] : tasks[indexPath.row]
+        vc.currentPosition = isSearching ? tasks.firstIndex(of: filteredTasks[indexPath.row]) ?? indexPath.row : indexPath.row
         vc.update = { [weak self] in
             self?.updateTask()
         }
@@ -106,17 +106,12 @@ extension ViewController: UITableViewDelegate {
 extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //Base case if something is there
-        if (isSearching) {
-            return filteredTasks.count
-        }
-        return tasks.count
+        return isSearching ? filteredTasks.count : tasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let task = tasks[indexPath.row]
-        
+        let task = isSearching ? filteredTasks[indexPath.row] : tasks[indexPath.row]
         cell.textLabel?.text = task
         
         var toggleButton: UIButton
@@ -132,6 +127,7 @@ extension ViewController: UITableViewDataSource {
             cell.addSubview(toggleButton)
         }
         
+        let taskIndex = isSearching ? tasks.firstIndex(of: filteredTasks[indexPath.row]) ?? indexPath.row : indexPath.row
         let isDone = UserDefaults.standard.bool(forKey: "task_\(indexPath.row + 1)_done")
         toggleButton.backgroundColor = isDone ? .green : .red
         
@@ -145,6 +141,7 @@ extension ViewController: UITableViewDataSource {
         //figure out what cell is tapped
         guard let indexPath = tableView.indexPathForRow(at: sender.convert(CGPoint.zero, to: tableView)) else { return }
         
+        let taskIndex = isSearching ? tasks.firstIndex(of: filteredTasks[indexPath.row]) ?? indexPath.row : indexPath.row
         let isDone = UserDefaults.standard.bool(forKey: "task_\(indexPath.row + 1)_done")
         
         //Toggling status and making sure its the right one
