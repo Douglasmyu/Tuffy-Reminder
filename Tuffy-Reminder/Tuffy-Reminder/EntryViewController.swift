@@ -1,45 +1,49 @@
-//
-//  EntryViewController.swift
-//  Tuffy-Reminder
-//
-//  Created by Douglas Yu on 12/6/24.
-//
+
+// Tuffy-Reminder
 
 import UIKit
 
-class EntryViewController: UIViewController, UITextFieldDelegate {
-    
-    @IBOutlet var field: UITextField!
-    
-    var update: (() -> Void)?
+class EntryViewController: UIViewController {
+
+    @IBOutlet var textField: UITextField!
+    @IBOutlet var datePicker: UIDatePicker!
+
+    public var update: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        field.delegate = self
+        view.backgroundColor = .white
+        datePicker.datePickerMode = .dateAndTime
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveTask))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSave))
     }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        saveTask()
-        return true
-    }
-    
-    @objc func saveTask() {
-        guard let text = field.text, !text.isEmpty else {
+
+    @objc func didTapSave() {
+        guard let text = textField.text, !text.isEmpty else {
+            let alert = UIAlertController(title: "Error", message: "Please enter a task name.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true)
             return
         }
-        guard let count = UserDefaults().value(forKey: "count") as? Int else {
+
+        let date = datePicker.date
+
+        // Save task with date
+        guard var count = UserDefaults().value(forKey: "count") as? Int else {
             return
         }
-        let newCount = count + 1
-        UserDefaults().setValue(newCount, forKey: "count")
-        UserDefaults().setValue(text, forKey: "task_\(newCount)")
-        UserDefaults().setValue(false, forKey: "task_\(newCount)_done")
-        
+
+        UserDefaults().setValue(text, forKey: "task_\(count + 1)")
+        UserDefaults().setValue(date, forKey: "task_\(count + 1)_date")
+        UserDefaults().setValue(false, forKey: "task_\(count + 1)_done")
+
+        count += 1
+        UserDefaults().setValue(count, forKey: "count")
+
         update?()
+
         navigationController?.popViewController(animated: true)
     }
-
-
 }
+
+

@@ -1,4 +1,3 @@
-//
 //  ViewController.swift
 //  Tuffy-Reminder
 //
@@ -132,30 +131,23 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let task = isSearching ? filteredTasks[indexPath.row] : tasks[indexPath.row]
-        cell.textLabel?.text = task
         
-        var toggleButton: UIButton
-        if let existingButton = cell.viewWithTag(1001) as? UIButton {
-            toggleButton = existingButton
-        } else {
-            let buttonSize: CGFloat = 20
-            toggleButton = UIButton(frame: CGRect(x: cell.frame.width - 70, y: (cell.frame.height - buttonSize) / 2, width: buttonSize, height: buttonSize))
-            toggleButton.tag = 1001
-            toggleButton.addTarget(self, action: #selector(toggleTaskStatus(_:)), for: .touchUpInside)
-            toggleButton.layer.cornerRadius = buttonSize / 2
-            toggleButton.clipsToBounds = true
-            cell.addSubview(toggleButton)
-        }
-        
+        // Retrieve the associated date
         let taskIndex = isSearching ? tasks.firstIndex(of: filteredTasks[indexPath.row]) ?? indexPath.row : indexPath.row
-        let isDone = UserDefaults.standard.bool(forKey: "task_\(indexPath.row + 1)_done")
-        toggleButton.backgroundColor = isDone ? .green : .red
-        
-        cell.accessoryType = isDone ? .checkmark : .none
+        if let taskDate = UserDefaults.standard.value(forKey: "task_\(taskIndex + 1)_date") as? Date {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            formatter.timeStyle = .short
+            
+            cell.textLabel?.text = "\(task) - \(formatter.string(from: taskDate))"
+        } else {
+            cell.textLabel?.text = task
+        }
 
+        let isDone = UserDefaults.standard.bool(forKey: "task_\(indexPath.row + 1)_done")
+        cell.accessoryType = isDone ? .checkmark : .none
         return cell
     }
-
 
     @objc func toggleTaskStatus(_ sender: UIButton) {
         //figure out what cell is tapped
@@ -190,4 +182,5 @@ extension ViewController : UISearchBarDelegate {
         tableView.reloadData()
     }
 }
+
 
