@@ -33,8 +33,33 @@ class ViewController: UIViewController {
         }
         // Get all current saved task
         updateTask()
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+            tableView.addGestureRecognizer(longPressGesture)
+        
     }
     
+    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .began else { return }
+        let location = gesture.location(in: tableView)
+        guard let indexPath = tableView.indexPathForRow(at: location) else { return }
+
+        let taskIndex = indexPath.row
+        let alert = UIAlertController(title: "Edit Task", message: "Update your task name", preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.text = self.tasks[taskIndex]
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak self] _ in
+            guard let text = alert.textFields?.first?.text, !text.isEmpty else { return }
+            
+            UserDefaults.standard.setValue(text, forKey: "task_\(taskIndex + 1)")
+            
+            self?.updateTask()
+        }))
+        present(alert, animated: true)
+    }
+
     func updateTask() {
         tasks.removeAll()
         guard let count = UserDefaults().value(forKey: "count") as? Int else {
