@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CKO-rR-kc8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CKO-rR-kc8">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -42,7 +42,7 @@
                                 </connections>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yr6-Ee-Dga">
-                                <rect key="frame" x="312" y="744" width="65" height="63.666666666666629"/>
+                                <rect key="frame" x="312" y="743.66666666666663" width="65" height="63.666666666666629"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="8ay-Id-vAA"/>
                                     <constraint firstAttribute="height" constant="65" id="OaQ-x8-spu"/>
@@ -110,6 +110,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="thh-dV-KaR">
+                                <rect key="frame" x="25" y="663" width="393" height="77"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </datePicker>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uXy-C3-Eoc"/>
                         <color key="backgroundColor" red="1" green="0.53810617194082422" blue="0.010026318873457285" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -121,12 +125,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="datePicker" destination="thh-dV-KaR" id="9dI-VH-JkU"/>
                         <outlet property="field" destination="DHA-Gd-s81" id="WbU-SZ-tiV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vhJ-oN-IeB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1143" y="673"/>
+            <point key="canvasLocation" x="1142.7480916030534" y="672.53521126760563"/>
         </scene>
         <!--Task View Controller-->
         <scene sceneID="Oir-zg-jCT">
